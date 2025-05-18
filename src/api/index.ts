@@ -25,19 +25,23 @@ const authHeader = () => ({
 export const login = async (
   email: string,
   password: string
-): Promise<{ token: string; user: User }> => {
+): Promise<{ token: string; user: { nome: string } }> => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, senha: password }),
   });
 
-  if (!response.ok) throw new Error("Falha ao autenticar");
+  if (!response.ok) throw new Error("Falha no login");
 
   const data = await response.json();
+
+  // Ajusta a estrutura esperada pelo frontend
   return {
     token: data.token,
-    user: data.usuario,
+    user: {
+      nome: data.nome,
+    },
   };
 };
 

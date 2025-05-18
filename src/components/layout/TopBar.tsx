@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Bell, Search, User } from 'lucide-react';
+import { useState } from "react";
+import { Bell, Search, User } from "lucide-react";
+import { logout } from "../../utils/auth";
 
 interface TopBarProps {
   children?: React.ReactNode;
@@ -8,17 +9,17 @@ interface TopBarProps {
 const TopBar = ({ children }: TopBarProps) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  
+
   const toggleNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
     if (isProfileOpen) setIsProfileOpen(false);
   };
-  
+
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
     if (isNotificationsOpen) setIsNotificationsOpen(false);
   };
-  
+
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm z-10">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
@@ -30,7 +31,7 @@ const TopBar = ({ children }: TopBarProps) => {
             </h1>
           </div>
         </div>
-        
+
         <div className="flex items-center space-x-4">
           {/* Search */}
           <div className="hidden md:block">
@@ -45,7 +46,7 @@ const TopBar = ({ children }: TopBarProps) => {
               />
             </div>
           </div>
-          
+
           {/* Notifications */}
           <div className="relative">
             <button
@@ -55,21 +56,31 @@ const TopBar = ({ children }: TopBarProps) => {
               <Bell size={20} />
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
-            
+
             {isNotificationsOpen && (
               <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
                 <div className="p-3 border-b border-gray-200">
-                  <h3 className="text-sm font-medium text-gray-900">Notificações</h3>
+                  <h3 className="text-sm font-medium text-gray-900">
+                    Notificações
+                  </h3>
                 </div>
                 <div className="max-h-64 overflow-y-auto">
                   <div className="p-3 border-b border-gray-100 hover:bg-gray-50">
-                    <p className="text-sm font-medium text-gray-900">Novas pesquisas adicionadas</p>
-                    <p className="text-xs text-gray-500 mt-1">20 novas pesquisas foram adicionadas hoje</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      Novas pesquisas adicionadas
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      20 novas pesquisas foram adicionadas hoje
+                    </p>
                     <p className="text-xs text-gray-400 mt-1">Há 10 minutos</p>
                   </div>
                   <div className="p-3 border-b border-gray-100 hover:bg-gray-50">
-                    <p className="text-sm font-medium text-gray-900">Alerta de inatividade</p>
-                    <p className="text-xs text-gray-500 mt-1">3 pesquisadores estão inativos há mais de 2 horas</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      Alerta de inatividade
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      3 pesquisadores estão inativos há mais de 2 horas
+                    </p>
                     <p className="text-xs text-gray-400 mt-1">Há 1 hora</p>
                   </div>
                 </div>
@@ -81,7 +92,7 @@ const TopBar = ({ children }: TopBarProps) => {
               </div>
             )}
           </div>
-          
+
           {/* Profile */}
           <div className="relative">
             <button
@@ -92,22 +103,38 @@ const TopBar = ({ children }: TopBarProps) => {
                 <User size={16} />
               </div>
             </button>
-            
+
             {isProfileOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
                 <div className="px-4 py-3 border-b border-gray-200">
-                  <p className="text-sm font-medium text-gray-900">Administrador</p>
-                  <p className="text-xs text-gray-500 truncate">admin@example.com</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    Administrador
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
+                    admin@example.com
+                  </p>
                 </div>
-                <a href="#profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <a
+                  href="#profile"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Seu Perfil
                 </a>
-                <a href="#settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <a
+                  href="#settings"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Configurações
                 </a>
-                <a href="#logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <button
+                  onClick={() => {
+                    setIsProfileOpen(false);
+                    logout();
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
                   Sair
-                </a>
+                </button>
               </div>
             )}
           </div>
