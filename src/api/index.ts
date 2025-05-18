@@ -8,18 +8,16 @@ import {
   HeatmapData,
 } from "../types";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
-
-const TOKEN_DEBUG =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6InBlc3F1aXNhZG9yIiwiaWF0IjoxNzQ3NTM1ODY0LCJleHAiOjE3NDc2MjIyNjR9.nqX7Gz1qPak3aS3C1Y7FbmqhWk9iGH9oTaBZPnfvuKU";
-
-// const authHeader = () => ({
-//   Authorization: `Bearer ${localStorage.getItem('token')}`,
-// });
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://servidor.shark-newton.ts.net";
 
 const authHeader = () => ({
-  Authorization: `Bearer ${TOKEN_DEBUG}`, // <-- token fixo
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
 });
+
+// const authHeader = () => ({
+//   Authorization: `Bearer ${TOKEN_DEBUG}`, // <-- token fixo
+// });
 
 // 🔐 Login
 export const login = async (
