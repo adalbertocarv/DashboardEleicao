@@ -11,7 +11,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://adalbertocarv.github.io/formulario_eleicao",
+  "homepage": "https://adalbertocarv.github.io/DashboardEleicao",
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@supabase/supabase-js": "^2.39.7",
