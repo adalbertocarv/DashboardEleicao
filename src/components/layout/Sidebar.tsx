@@ -36,7 +36,7 @@ const Sidebar = ({ expanded, onClose }: SidebarProps) => {
           <div className="bg-blue-900 text-white p-2 rounded">
             <BarChart2 size={20} />
           </div>
-          {expanded && <span className="text-xl font-bold">OpinionPoll</span>}
+          {expanded && <span className="text-xl font-bold">OP Brasil</span>}
         </Link>
         <button
           onClick={onClose}
